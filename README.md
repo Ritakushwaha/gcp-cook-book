@@ -73,5 +73,5 @@ gs://de_analytics/retail_db/products/part-00000
 
 File and folder as objects in bucket (container)
 
-### Create bucket using CLI
+### Create bucket using Command Line Interface (CLI)
 
