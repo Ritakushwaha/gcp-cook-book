@@ -1,170 +1,116 @@
 # gcp-cook-book
+A step-by-step guide to get started with Google Cloud Platform (GCP) for Data Engineering using Python and the command-line interface. This repository helps you learn how to manage data files and buckets using both the gsutil command-line tool and Python SDK.
 
-## Pre-requisite Skills for the course
+## 📋 Prerequisites
+Before starting, ensure you have the following skills:
+✅ SQL: Comfortable querying data using SQL.
+✅ Python: Hands-on experience with Python programming.
+✅ Data Engineering or Data Warehousing knowledge.
+✅ Command Line Basics: Familiarity with terminal tools like bash, zsh, etc.
 
-* Working experience using SQL is required
-* Programming experience is required, preferably using Python
-* Data Engineering or Data Warehousing experience
-* Basic understanding of Command Line tools such as zsh
+## 🚀 Getting Started
+### 🔐 Sign Up for GCP
+* Visit https://cloud.google.com.
+* Sign up with a valid email ID.
+* New users get $300 credit valid for 3 months.
 
-## Signing up for GCP
-Let us make sure we signup for GCP using valid email id. Keep in mind that you are eligible for USD 300 credit which is valid for 3 months.
-
-## Check for the Python installation
+## 🐍 Python Environment Setup
+Ensure Python 3.9 is installed.
 ```
-python3.9
+python3.9 --version
 ```
-Create a virtul env in the working directory
+
+### 📦 Create and Activate a Virtual Environment
 ```
 python3.9 -m venv de_env
+source de_env/bin/activate
 ```
-Activate the virtual env
+
+### 📥 Install Required Packages
 ```
-source myenv/bin/activate
+pip install <package-name>
 ```
-Install Packages
-```
-pip install package
-```
-Save installed packages to requirements.txt
+To save all installed packages:
 ```
 pip freeze > requirements.txt
 ```
-Install Packages from a File
+To install packages from an existing file:
 ```
 pip install -r requirements.txt
 ```
 
-## Setup Google Cloud SDK
+## ☁️ Google Cloud SDK Setup
 Click [here](https://cloud.google.com/sdk/docs/install) to go to the instructions related to setting up gcloud CLI.
 
-## gsutil list
-gs://de_analytics/
+### Once installed, verify:
+```
+gcloud info
+```
+### Authenticate your CLI:
+```
+gcloud auth login
+```
+### For Python API authentication:
+```
+gcloud auth application-default login
+```
 
-## gsutil ls
-gs://de_analytics/
-
-## gsutil ls gs://de_analytics/
-gs://de_analytics/retail_db/
-
-## gsutil ls -r gs://de_analytics/
-gs://de_analytics/retail_db/:
-gs://de_analytics/retail_db/create_db_tables_pg.sql
-gs://de_analytics/retail_db/load_db_tables_pg.sql
-gs://de_analytics/retail_db/schemas.json
-
-gs://de_analytics/retail_db/categories/:
-gs://de_analytics/retail_db/categories/part-00000
-
-gs://de_analytics/retail_db/customers/:
-gs://de_analytics/retail_db/customers/part-00000
-
-gs://de_analytics/retail_db/departments/:
-gs://de_analytics/retail_db/departments/part-00000
-
-gs://de_analytics/retail_db/order_items/:
-gs://de_analytics/retail_db/order_items/part-00000
-
-gs://de_analytics/retail_db/orders/:
-gs://de_analytics/retail_db/orders/part-00000
-
-gs://de_analytics/retail_db/products/:
-gs://de_analytics/retail_db/products/part-00000
-
-File and folder as objects in bucket (container)
-
-### Create bucket using Command Line Interface (CLI)
-gsutil mb gs://de_analytics
-
-## Copy datasets into the bucket
-gsutil cp -r data/retail_db gs://de_analytics/data/retail_db
-
+## 🧰 GCS (Google Cloud Storage) with CLI
+### 🔍 List Buckets and Files
+```
+gsutil ls
 gsutil ls gs://de_analytics/
 gsutil ls -r gs://de_analytics/
+```
+### 📦 Example File Structure
+```
+gs://de_analytics/retail_db/
+├── create_db_tables_pg.sql
+├── load_db_tables_pg.sql
+├── schemas.json
+├── categories/
+│   └── part-00000
+├── customers/
+│   └── part-00000
+... (other folders)
+```
 
-## Cleanup the bucket
-### empty bucket if the bucket is empty else error:
-gsutil rb gs://de_analytics
-Removing gs://de_analytics/...
-NotEmptyException: 409 BucketNotEmpty (de_analytics)
+## 🪣 Create a Bucket 
+```
+gsutil mb gs://de_analytics
+```
 
-### all data recursively :
-gsutil rb gs://de_analytics
-Removing gs://de_analytics/...
-NotEmptyException: 409 BucketNotEmpty (de_analytics)
-kushwaharitu893@cloudshell:~/gcp-cook-book (spring-base-455810-r1)$ gsutil rm -r gs://de_analytics/data/retail_db
-Removing gs://de_analytics/data/retail_db/categories/part-00000#1744016887729993...
-Removing gs://de_analytics/data/retail_db/create_db_tables_pg.sql#1744016885568058...
-Removing gs://de_analytics/data/retail_db/customers/part-00000#1744016890257527...
-Removing gs://de_analytics/data/retail_db/departments/part-00000#1744016890629605...
-/ [4 objects]                                                                   
-==> NOTE: You are performing a sequence of gsutil operations that may
-run significantly faster if you instead use gsutil -m rm ... Please
-see the -m section under "gsutil help options" for further information
-about when gsutil -m can be advantageous.
+## 📤 Copy Datasets into Bucket 
+gsutil cp -r data/retail_db gs://de_analytics/data/retail_db
 
-Removing gs://de_analytics/data/retail_db/load_db_tables_pg.sql#1744016883893356...
-Removing gs://de_analytics/data/retail_db/order_items/part-00000#1744016895974621...
-Removing gs://de_analytics/data/retail_db/orders/part-00000#1744016892777887... 
-Removing gs://de_analytics/data/retail_db/products/part-00000#1744016887371619...
-Removing gs://de_analytics/data/retail_db/schemas.json#1744016885204513...      
-/ [9 objects]                                                                   
-Operation completed over 9 objects.           
+## 🧹 Cleanup the Bucket
+### Option 1: Remove Specific Data
+```
+gsutil rm -r gs://de_analytics/data/retail_db
+```
 
-### this will remove bucket as well
+### Option 2: Remove Entire Bucket
 gsutil rm -r gs://de_analytics
-Removing gs://de_analytics/data/retail_db/categories/part-00000#1744017293784601...
-Removing gs://de_analytics/data/retail_db/create_db_tables_pg.sql#1744017292536164...
-Removing gs://de_analytics/data/retail_db/customers/part-00000#1744017295380088...
-Removing gs://de_analytics/data/retail_db/departments/part-00000#1744017295739320...
-/ [4 objects]                                                                   
-==> NOTE: You are performing a sequence of gsutil operations that may
-run significantly faster if you instead use gsutil -m rm ... Please
-see the -m section under "gsutil help options" for further information
-about when gsutil -m can be advantageous.
 
-Removing gs://de_analytics/data/retail_db/load_db_tables_pg.sql#1744017291799977...
-Removing gs://de_analytics/data/retail_db/order_items/part-00000#1744017300832181...
-Removing gs://de_analytics/data/retail_db/orders/part-00000#1744017298599002... 
-Removing gs://de_analytics/data/retail_db/products/part-00000#1744017293418878...
-Removing gs://de_analytics/data/retail_db/schemas.json#1744017292159362...      
-/ [9 objects]                                                                   
-Operation completed over 9 objects.                                              
-Removing gs://de_analytics/...
-
-
-## Manage buckets and files in GCS using CLI
-
-## Manage buckets and files in GCS using Python (VS Code)
-gcloud 
-gcloud info
-gsutil
-gsutil help 
-
-to check if the python has google clous torage
-
-python
-Python 3.9.21 (main, Dec  3 2024, 17:50:13) 
-[Clang 16.0.0 (clang-1600.0.26.4)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
->>> from google.cloud import storage
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-ModuleNotFoundError: No module named 'google'
->>> exit()
-
+## 🐍 Manage GCS Buckets with Python
+### Step 1: Install GCS Client Library
 ```
 pip3 install google-cloud-storage
 ```
-success:
-python                           
-Python 3.9.21 (main, Dec  3 2024, 17:50:13) 
-[Clang 16.0.0 (clang-1600.0.26.4)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
->>> from google.cloud import storage
->>> 
+### Step 2: Verify Installation
+```
+from google.cloud import storage
+```
 
-Python Noteboook - Manage Files in GCS using Python.ipynb
+### Refer Notebook : GCS with Python.ipynb
 
+## ✅ Summary
 
-For Authentication: gcloud auth application-default login
+| Task                     | Tool   | Command                                     |
+|--------------------------|--------|---------------------------------------------|
+| Create bucket            | gsutil | `gsutil mb gs://your-bucket-name`           |
+| Upload folder to bucket  | gsutil | `gsutil cp -r local_dir gs://bucket/`       |
+| List buckets/files       | gsutil | `gsutil ls` or `gsutil ls -r`               |
+| Remove files             | gsutil | `gsutil rm -r gs://bucket/path`             |
+| Authenticate CLI         | gcloud | `gcloud auth login`                         |
+| Python GCS SDK           | pip    | `pip install google-cloud-storage`          |
