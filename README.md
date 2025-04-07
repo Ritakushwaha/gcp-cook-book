@@ -135,4 +135,36 @@ Removing gs://de_analytics/...
 
 ## Manage buckets and files in GCS using CLI
 
-## Manage buckets and files in GCS using Python
+## Manage buckets and files in GCS using Python (VS Code)
+gcloud 
+gcloud info
+gsutil
+gsutil help 
+
+to check if the python has google clous torage
+
+python
+Python 3.9.21 (main, Dec  3 2024, 17:50:13) 
+[Clang 16.0.0 (clang-1600.0.26.4)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from google.cloud import storage
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'google'
+>>> exit()
+
+```
+pip3 install google-cloud-storage
+```
+success:
+python                           
+Python 3.9.21 (main, Dec  3 2024, 17:50:13) 
+[Clang 16.0.0 (clang-1600.0.26.4)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from google.cloud import storage
+>>> 
+
+Python Noteboook - Manage Files in GCS using Python.ipynb
+
+
+For Authentication: gcloud auth application-default login
