@@ -17,34 +17,7 @@ Apache Beam is an open-source, unified programming model designed for defining a
 - **Open Source**: Apache Beam is an open-source project, fostering community-based development and support.
 
 ## Core Concepts
-
-graph TD
-  A[User Code (SDKs)\nJava | Python | Go] --> B[Pipeline]
-
-  B --> C[PCollection]
-  B --> D[PTransform]
-
-  C --> E[Runner]
-  D --> E
-
-  E --> F[Apache Spark Runner]
-  E --> G[Apache Flink Runner]
-  E --> H[Google Cloud Dataflow Runner]
-  E --> I[Direct Runner]
-  E --> J[Hazelcast Jet Runner]
-  E --> K[Twister2 Runner]
-
-  style A fill:#E3F2FD,stroke:#2196F3,stroke-width:2px
-  style B fill:#FFF3E0,stroke:#FB8C00,stroke-width:2px
-  style C fill:#E8F5E9,stroke:#43A047,stroke-width:2px
-  style D fill:#F3E5F5,stroke:#8E24AA,stroke-width:2px
-  style E fill:#ECEFF1,stroke:#607D8B,stroke-width:2px
-  style F fill:#FBE9E7
-  style G fill:#F1F8E9
-  style H fill:#E3F2FD
-  style I fill:#F9FBE7
-  style J fill:#FFFDE7
-  style K fill:#F3E5F5
+![Apache Beam Architecture](./images/Apache_Beam.png)
 
 - **Pipeline**: A pipeline is a user-constructed graph of transformations that defines the desired data processing operations.
 
@@ -94,3 +67,19 @@ To begin using Apache Beam, you can explore the following resources:
 
 For more information, visit the official Apache Beam website: [https://beam.apache.org/](https://beam.apache.org/)
 
+# Apache Beam + Google Cloud Dataflow Integration
+
+graph TD
+  A[User Code (Apache Beam SDK)\n(Java / Python)] --> B[Define Pipeline]
+
+  B --> C[PCollection]
+  B --> D[PTransform]
+
+  C --> E[Google Cloud Dataflow Runner]
+  D --> E
+
+  E --> F[Job Graph Compilation]
+  F --> G[Autoscaling Execution in GCP]
+  G --> H[Process Batch / Streaming Data]
+
+  H --> I[Output to Sink\n(BigQuery, GCS, Pub/Sub, etc.)]
