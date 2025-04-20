@@ -17,7 +17,7 @@ Apache Beam is an open-source, unified programming model designed for defining a
 - **Open Source**: Apache Beam is an open-source project, fostering community-based development and support.
 
 ## Core Concepts
-![Apache Beam Architecture](/images/Apache_Beam.png)
+![Apache Beam Architecture](/images/Apache_Beam.svg)
 
 - **Pipeline**: A pipeline is a user-constructed graph of transformations that defines the desired data processing operations.
 
