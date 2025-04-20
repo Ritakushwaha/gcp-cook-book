@@ -17,7 +17,7 @@ Apache Beam is an open-source, unified programming model designed for defining a
 - **Open Source**: Apache Beam is an open-source project, fostering community-based development and support.
 
 ## Core Concepts
-![Apache Beam Architecture](./images/Apache_Beam.png)
+![Apache Beam Architecture](/images/Apache_Beam.png)
 
 - **Pipeline**: A pipeline is a user-constructed graph of transformations that defines the desired data processing operations.
 
@@ -26,24 +26,6 @@ Apache Beam is an open-source, unified programming model designed for defining a
 - **PTransform**: A `PTransform` represents a data processing operation, or a step, in your pipeline. A transform is applied to zero or more `PCollection` objects, and produces zero or more `PCollection` objects.
 
 - **Runner**: A runner executes a Beam pipeline using the capabilities of your chosen data processing engine.
-
-## Supported SDKs and Runners
-
-Apache Beam provides SDKs for multiple programming languages, including:
-
-- Java
-- Python
-- Go
-- Scala (via Scio)
-
-Beam supports various runners, such as:
-
-- Direct Runner
-- Apache Flink Runner
-- Apache Spark Runner
-- Google Cloud Dataflow Runner
-- Hazelcast Jet Runner
-- Twister2 Runner
 
 ## Use Cases
 
