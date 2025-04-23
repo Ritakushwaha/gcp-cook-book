@@ -50,18 +50,5 @@ To begin using Apache Beam, you can explore the following resources:
 For more information, visit the official Apache Beam website: [https://beam.apache.org/](https://beam.apache.org/)
 
 # Apache Beam + Google Cloud Dataflow Integration
+![Apache Beam with DataFlow](/images/DataFlow_ApacheBeam.svg)
 
-graph TD
-  A[User Code (Apache Beam SDK)\n(Java / Python)] --> B[Define Pipeline]
-
-  B --> C[PCollection]
-  B --> D[PTransform]
-
-  C --> E[Google Cloud Dataflow Runner]
-  D --> E
-
-  E --> F[Job Graph Compilation]
-  F --> G[Autoscaling Execution in GCP]
-  G --> H[Process Batch / Streaming Data]
-
-  H --> I[Output to Sink\n(BigQuery, GCS, Pub/Sub, etc.)]
