@@ -50,5 +50,5 @@ To begin using Apache Beam, you can explore the following resources:
 For more information, visit the official Apache Beam website: [https://beam.apache.org/](https://beam.apache.org/)
 
 # Apache Beam + Google Cloud Dataflow Integration
-![Apache Beam with DataFlow](/images/DataFlow_ApacheBeam.svg)
+<img src="/images/DataFlow_ApacheBeam.svg" alt="Apache Beam with DataFlow" width="1000" height="700">
 
